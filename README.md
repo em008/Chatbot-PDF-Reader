@@ -7,4 +7,4 @@ Once the PDF is loaded the data can be transformed to be more suitable for this 
 To run the app locally open a terminal or CLI and navigate to the directory where the `requirements.txt` file is located. Next, run the following command to install the packages listed in `requirements.txt`: `pip install -r requirements.txt`. Then, navigate to the directory where the `chatbot.py` file is located and run the command: `python chatbot.py`. The app will run on the terminal or CLI and will ask for the Hugging Face API token and a PDF file path. 
 
 Tech Stack
-- Python, LangChain, Google FLAN
+- Python, LangChain Framework, Google FLAN
