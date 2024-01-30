@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+</head>
+<body>
+    <h1>Chatbot</h1>
+    <div id="chatbox">
+        <p id="chatlog"></p>
+    </div>
+    <input type="text" name="msg" id="msg" placeholder="Ask something...">
+    <button onclick="get_response()">Send</button>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function get_response(){
+            let user_text = $('#msg').val();
+            $.get("/get", { msg: user_text }).done(function(data) {
+                $('#chatlog').html(data);
+            });
+        }
+    </script>
+</body>
+</html>
