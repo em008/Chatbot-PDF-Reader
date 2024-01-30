@@ -10,3 +10,4 @@ pdfminer.six
 opencv-python
 unstructured[local-inference]
 sentence-transformers
+Flask
