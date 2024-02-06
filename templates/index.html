@@ -1,23 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Chatbot</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot UI</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Chatbot</h1>
-    <div id="chatbox">
-        <p id="chatlog"></p>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>Chatbot</h1>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Chat messages will be displayed here -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
     </div>
-    <input type="text" name="msg" id="msg" placeholder="Ask something...">
-    <button onclick="get_response()">Send</button>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        function get_response(){
-            let user_text = $('#msg').val();
-            $.get("/get", { msg: user_text }).done(function(data) {
-                $('#chatlog').html(data);
-            });
+        function sendMessage() {
+            const userInput = document.getElementById('user-input').value;
+            // Send userInput to the server (Flask route) and get chatbot response
+            // Display chatbot response in the chat-messages div
+            // Example: document.getElementById('chat-messages').innerHTML += `<div class="message">Chatbot: ${response}</div>`;
         }
     </script>
 </body>
