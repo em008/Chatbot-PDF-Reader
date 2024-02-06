@@ -1,19 +1,24 @@
-from flask import Flask, render_template, request # Import libraries
+from flask import Flask, render_template, request, jsonify # Import libraries
 import chatbot # Import ML model function module
 
 # Initialize Flask app
 app = Flask(__name__)
 
-# Default home page
+# Initialize chatbot
+def get_chatbot_response(user_input):
+    # chatbot logic goes here
+    return "Chatbot response"
+
 @app.route('/')
-def home():
-    return render_template('index.html')
+def index():
+    return render_template('chat.html')
 
-@app.route('/get')
-def get_bot_response():
-    user_text = request.args.get('msg')
-    return str(chatbot.CreateChatbot().invoke(user_text))
+@app.route('/chat', methods=['POST'])
+def chat():
+    user_input = request.form.get('user_input')
+    chatbot_response = get_chatbot_response(user_input)
+    return jsonify({'response': chatbot_response})
 
-if __name__ == "__main__":
-    app.run()
+if __name__ == '__main__':
+    app.run(debug=True)
   
