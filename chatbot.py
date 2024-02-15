@@ -4,6 +4,7 @@ This code requires the user to have a Hugging Face API token, which is used to a
 """
 
 from langchain_community.llms import HuggingFaceHub
+from huggingface_hub import InferenceClient
 from src.pdfloader import load_pdf
 from src.prompt import pdfreaderprompt
 from langchain.chains import RetrievalQA
@@ -14,11 +15,6 @@ def get_huggingface_api_token():
     # Prompt user for Hugging Face API token
     return input("Enter Hugging Face API Token: ")
 
-def load_pdf_file():
-    # Load PDF file
-    file_path = input("Enter file path: ")
-    return load_pdf(file_path)
-
 def initialize_language_model():
     # Initialize language model
     repo_id = "google/flan-t5-xxl"
@@ -26,6 +22,11 @@ def initialize_language_model():
         repo_id=repo_id, model_kwargs={"temperature": 0.5, "max_length": 64}
     )
     return llm
+
+def load_pdf_file():
+    # Load PDF file
+    file_path = input("Enter file path: ")
+    return load_pdf(file_path)
 
 def create_chatbot(llm, vectorDB):
     # Set up chatbot prompt
@@ -44,14 +45,14 @@ if __name__ == '__main__':
     HUGGINGFACEHUB_API_TOKEN = getpass()
     os.environ["HUGGINGFACEHUB_API_TOKEN"] = huggingface_api_token
 
-    pdf_file = load_pdf_file()
     language_model = initialize_language_model()
-    chatbot = create_chatbot(language_model, pdf_file)
+    pdf_file = load_pdf_file()
+    chatbot_input = create_chatbot(language_model, pdf_file)
 
     while True:
         user_input = input("You: ")
         if user_input.lower() in ["exit", "quit", "bye"]:
             print("Chatbot: Goodbye!")
             break
-        response = chatbot.invoke(user_input)
+        response = chatbot_input.invoke(user_input)
         print("Chatbot:", response)
