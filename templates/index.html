@@ -1,32 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot UI</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Chatbot</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <div class="chat-container">
-        <div class="chat-header">
-            <h1>Chatbot</h1>
-        </div>
-        <div class="chat-messages" id="chat-messages">
-            <!-- Chat messages will be displayed here -->
-        </div>
-        <div class="chat-input">
-            <input type="text" id="user-input" placeholder="Type your message...">
-            <button onclick="sendMessage()">Send</button>
-        </div>
-    </div>
+    <h1>Chatbot</h1>
+    <form id="chat-form">
+        <label for="message">Enter your message:</label><br>
+        <input type="text" id="message" name="message"><br>
+        <input type="submit" value="Send">
+    </form>
+    <p id="response"></p>
 
     <script>
-        function sendMessage() {
-            const userInput = document.getElementById('user-input').value;
-            // Send userInput to the server (Flask route) and get chatbot response
-            // Display chatbot response in the chat-messages div
-            // Example: document.getElementById('chat-messages').innerHTML += `<div class="message">Chatbot: ${response}</div>`;
-        }
+    $(document).ready(function(){
+        $('#chat-form').on('submit', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '/chat',
+                data: JSON.stringify({message: $('#message').val()}),
+                type: 'POST',
+                contentType: 'application/json',
+                success: function(response) {
+                    $('#response').text('Chatbot: ' + response.response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
     </script>
+</body>
+</html>
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+</head>
+<body>
+    <h1>Welcome to the Chatbot!</h1>
+    <form action="/chat" method="post">
+        <label for="message">Enter your message:</label><br>
+        <input type="text" id="message" name="message"><br>
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>
