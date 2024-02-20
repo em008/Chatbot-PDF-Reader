@@ -1,13 +1,4 @@
 langchain
 langchain-community
 huggingface_hub
-streamlit
-chromadb
-tiktoken
-unstructured
-pdf2image
-pdfminer.six
-opencv-python
-unstructured[local-inference]
-sentence-transformers
-Flask
+flask
