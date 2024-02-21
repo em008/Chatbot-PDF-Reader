@@ -1,7 +1,6 @@
 """
 This code creates a chatbot that can answer questions based on a given PDF file.
 This code requires the user to have a Hugging Face API token, which is used to access the Hugging Face model. The user is prompted to enter the API token when the code is run.
-
 """
 
 from langchain_community.llms import HuggingFaceHub
@@ -12,9 +11,11 @@ from langchain.chains import RetrievalQA
 from getpass import getpass
 import os
 
+
 def get_huggingface_api_token():
     # Prompt user for Hugging Face API token
     return input("Enter Hugging Face API Token: ")
+
 
 def initialize_language_model():
     # Initialize language model
@@ -24,10 +25,12 @@ def initialize_language_model():
     )
     return llm
 
+
 def load_pdf_file():
     # Load PDF file
     file_path = input("Enter file path: ")
     return load_pdf(file_path)
+
 
 def create_chatbot(llm, vectorDB):
     # Set up chatbot prompt
@@ -40,6 +43,7 @@ def create_chatbot(llm, vectorDB):
     )
 
     return chatbot
+
 
 if __name__ == '__main__':
     huggingface_api_token = get_huggingface_api_token()
@@ -57,4 +61,3 @@ if __name__ == '__main__':
             break
         response = chatbot_input.invoke(user_input)
         print("Chatbot:", response)
-
