@@ -4,7 +4,6 @@ This code requires the user to have a Hugging Face API token, which is used to a
 """
 
 from langchain_community.llms import HuggingFaceHub
-from huggingface_hub import InferenceClient
 from src.pdfloader import load_pdf
 from src.prompt import pdfreaderprompt
 from langchain.chains import RetrievalQA
