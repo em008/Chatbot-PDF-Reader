@@ -8,7 +8,6 @@ from huggingface_hub import InferenceClient
 from src.pdfloader import load_pdf
 from src.prompt import pdfreaderprompt
 from langchain.chains import RetrievalQA
-from getpass import getpass
 import os
 
 
@@ -47,7 +46,6 @@ def create_chatbot(llm, vectorDB):
 
 if __name__ == '__main__':
     huggingface_api_token = get_huggingface_api_token()
-    HUGGINGFACEHUB_API_TOKEN = getpass()
     os.environ["HUGGINGFACEHUB_API_TOKEN"] = huggingface_api_token
 
     language_model = initialize_language_model()
